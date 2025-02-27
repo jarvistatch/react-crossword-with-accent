@@ -509,7 +509,13 @@ const CrosswordProvider = React.forwardRef<
               break;
             }
 
-            if (checkCell.guess !== checkCell.answer) {
+            const normalizeString = (str: string) =>
+              str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+            if (
+              normalizeString(checkCell.guess) !==
+              normalizeString(checkCell.answer)
+            ) {
               correct = false;
             }
           }
